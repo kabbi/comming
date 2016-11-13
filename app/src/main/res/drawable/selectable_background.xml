@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidElementNotAllowed -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="false">
+        <ripple android:color="#EAEAEA"/>
+    </item>
+    <item android:state_selected="true">
+        <ripple android:color="#EAEAEA">
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#EAEAEA"/>
+                </shape>
+            </item>
+        </ripple>
+    </item>
+</selector>

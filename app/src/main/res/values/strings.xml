@@ -1,0 +1,21 @@
+<resources>
+    <string name="mapbox_api_key">pk.eyJ1Ijoia2FiYmkiLCJhIjoiY2l2YmJkYTJrMDA1eDJ5cWRxaGhyOTlldSJ9.0pqWoDd1Y2Ljh9nhQklWng</string>
+    <string name="api_host">http://private-41dfe-kabbi.apiary-mock.com</string>
+
+    <string name="app_name">I\'m Coming</string>
+
+    <string name="title_activity_main">I\'m Coming</string>
+    <string name="map_placeholder">Map here</string>
+    <string name="share_location_label">Send location link</string>
+    <string name="options_menu_alt">Options menu</string>
+    <string name="reshare_label">Share same link again</string>
+    <string name="settings_label">Settings</string>
+    <string name="app_logo_alt">App logo</string>
+    <string name="progress_indicator_label">Please, wait…</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="settings_activity_title">Who\'s coming</string>
+    <string name="your_name_label">Your Name</string>
+    <string name="enabled_switch_label">Shared location</string>
+    <string name="selected_avatar_alt">Selected avatar</string>
+    <string name="avatar_alt">Avatar</string>
+</resources>
