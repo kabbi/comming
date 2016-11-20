@@ -3,15 +3,15 @@ package org.c8.research.comming
 import android.content.Context
 import com.google.gson.GsonBuilder
 import org.c8.research.comming.entities.Api
-import retrofit.GsonConverterFactory
-import retrofit.Retrofit
-import retrofit.RxJavaCallAdapterFactory
-import retrofit.http.Body
-import retrofit.http.POST
-import retrofit.http.Path
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.POST
+import retrofit2.http.Path
 import rx.Observable
 
-interface CommingService {
+interface CommingApi {
 
     @POST("/routes")
     fun createRoute(@Body request: Api.NewRouteRequest): Observable<Api.NewRouteResponse>
@@ -23,7 +23,7 @@ interface CommingService {
     fun pushRoutePoint(@Path("routeId") routeId: String, @Body request: Api.PushPointRequest): Observable<Unit>
 
     companion object {
-        fun create(context: Context) : CommingService {
+        fun create(context: Context) : CommingApi {
             val gsonBuilder = GsonBuilder()
 
             val restAdapter = Retrofit.Builder()
@@ -32,7 +32,7 @@ interface CommingService {
                     .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                     .build()
 
-            return restAdapter.create(CommingService::class.java)
+            return restAdapter.create(CommingApi::class.java)
         }
     }
 }

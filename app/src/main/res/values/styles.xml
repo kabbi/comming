@@ -1,25 +1,26 @@
 <resources>
 
+    <attr name="colorDivider" format="color" />
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimaryAlt</item>
-        <item name="android:popupMenuStyle">@style/AppTheme.PopupTheme</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimary">@color/white_</item>
+        <item name="colorPrimaryDark">@color/black_</item>
+        <item name="colorAccent">@color/blue_imcoming</item>
+        <item name="colorControlNormal">@color/black_</item>
+        <item name="colorControlHighlight">@color/blue_imcoming_light</item>
+        <item name="colorButtonNormal">@color/blue_imcoming</item>
+        <item name="colorDivider">@color/black_8_alpha</item>
+        <item name="android:textColorPrimary">@color/dark_primary</item>
+        <item name="android:textColorSecondary">@color/black_50_alpha</item>
+        <item name="android:windowBackground">@color/white_</item>
     </style>
 
-    <style name="AppTheme.PopupTheme" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
-        <item name="android:popupBackground">@color/colorMenuText</item>
-    </style>
-
-    <style name="AppTheme.ColoredButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@drawable/nontransparent_color_state</item>
+    <style name="PopupTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/blue_imcoming</item>
+        <item name="android:colorBackground">@color/blue_imcoming</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

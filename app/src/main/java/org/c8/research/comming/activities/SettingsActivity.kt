@@ -3,10 +3,10 @@ package org.c8.research.comming.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import com.pawegio.kandroid.textWatcher
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_settings.*
-import org.c8.research.comming.CommingService
+import org.c8.research.comming.CommingApi
 import org.c8.research.comming.Constants
 import org.c8.research.comming.R
 import org.c8.research.comming.adapters.AvatarChooserAdapter
@@ -15,14 +15,14 @@ import org.c8.research.comming.services.LocationTrackingService
 import org.c8.research.comming.utils.connectGoogleApi
 
 class SettingsActivity : AppCompatActivity() {
-    val commingService: CommingService by lazy {
-        CommingService.create(applicationContext)
+    val mCommingApi: CommingApi by lazy {
+        CommingApi.create(applicationContext)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -58,7 +58,7 @@ class SettingsActivity : AppCompatActivity() {
 
     fun onSettingsUpdated() {
         Preferences.Route.id ?: return
-        commingService.updateRouteSettings(
+        mCommingApi.updateRouteSettings(
                 Preferences.Route.id!!,
                 Preferences.Settings.toRouteSettings()
         )

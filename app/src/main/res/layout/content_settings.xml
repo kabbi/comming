@@ -1,60 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:id="@+id/content_settings"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.c8.research.comming.activities.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
     <EditText
         android:id="@+id/title_edit"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textCapWords"
-        android:imeOptions="actionDone"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/edge_margin"
+        android:gravity="center_horizontal"
         android:hint="@string/your_name_label"
+        android:imeOptions="actionDone"
+        android:inputType="textCapWords"
+        android:maxLength="30"
+        android:minEms="8"
         tools:ignore="LabelFor"/>
 
     <ImageView
         android:id="@+id/selected_avatar_view"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_below="@id/title_edit"
-        android:src="@drawable/man1lg"
         android:contentDescription="@string/selected_avatar_alt"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@drawable/man1lg"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/avatar_chooser_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/selected_avatar_view"
-        android:scrollbars="horizontal"
+        android:layout_margin="@dimen/edge_margin"
         android:orientation="horizontal"
+        android:scrollbars="none"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
-    <Switch
-        android:id="@+id/enabled_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+    <include
+        layout="@layout/layout_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/edge_margin"
+        android:layout_marginRight="@dimen/edge_margin"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/enabled_switch"
-        android:layout_alignBaseline="@id/enabled_switch"
-        android:layout_marginLeft="7dp"
-        android:labelFor="@id/enabled_switch"
-        android:text="@string/enabled_switch_label"
-        android:layout_alignParentBottom="true"/>
+        android:background="?selectableItemBackground"
+        android:paddingBottom="@dimen/edge_margin"
+        android:paddingTop="@dimen/edge_margin">
 
-</RelativeLayout>
+        <Switch
+            android:id="@+id/enabled_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="64dp"
+            android:labelFor="@id/enabled_switch"
+            android:text="@string/enabled_switch_label"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -12,7 +12,7 @@ import com.google.android.gms.location.LocationServices
 import com.pawegio.kandroid.i
 import com.pawegio.kandroid.w
 import com.pawegio.kandroid.wtf
-import org.c8.research.comming.CommingService
+import org.c8.research.comming.CommingApi
 import org.c8.research.comming.entities.Api
 import org.c8.research.comming.entities.Preferences
 
@@ -21,7 +21,7 @@ const val MIN_UPDATE_INTERVAL_MILLIS: Long = 1000
 
 class LocationTrackingService : IntentService("LocationTrackingService") {
     val commingService by lazy {
-        CommingService.create(this)
+        CommingApi.create(this)
     }
 
     override fun onHandleIntent(intent: Intent?) {

@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="blue_imcoming">#1e88e5</color>
+    <color name="blue_imcoming_light">#1ea3e5</color>
 
-    <color name="colorPrimaryAlt">#1e88e5</color>
-    <color name="colorPrimaryAltLight">#b91e88e5</color>
-    <color name="colorMenuText">#79000000</color>
+    <color name="dark_primary">#222222</color>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="black_">#FF000000</color>
+    <color name="black_90_alpha">#E6000000</color>
+    <color name="black_80_alpha">#CD000000</color>
+    <color name="black_75_alpha">#BF000000</color>
+    <color name="black_70_alpha">#B3000000</color>
+    <color name="black_50_alpha">#88000000</color>
+    <color name="black_40_alpha">#66000000</color>
+    <color name="black_30_alpha">#4C000000</color>
+    <color name="black_15_alpha">#26000000</color>
+    <color name="black_8_alpha">#14000000</color>
+
+    <color name="medium_gray">#777777</color>
+
+    <color name="white_">#FFFFFF</color>
+    <color name="white_95_alpha">#F0FFFFFF</color>
+    <color name="white_99_alpha">#FCFFFFFF</color>
+    <color name="white_80_alpha">#CDFFFFFF</color>
+    <color name="white_70_alpha">#BFFFFFFF</color>
+    <color name="white_50_alpha">#88FFFFFF</color>
+    <color name="white_30_alpha">#4CFFFFFF</color>
+    <color name="white_15_alpha">#26FFFFFF</color>
+    <color name="white_8_alpha">#14FFFFFF</color>
+
 </resources>
