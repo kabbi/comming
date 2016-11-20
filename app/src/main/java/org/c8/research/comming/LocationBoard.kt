@@ -33,8 +33,8 @@ class LocationBoard(applicationContext: Context) {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ result ->
-                        val ( route, googleApi ) = result
-                        Preferences.Route.id = route.id
+                        val (route, googleApi) = result
+                        Preferences.Route.id = route._id
                         Preferences.Route.url = route.url
                         LocationTrackingService.startLocationTracking(context, googleApi)
                         googleApi.disconnect()

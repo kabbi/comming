@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                             val intent = Intent(Intent.ACTION_SEND)
                             intent.type = "text/plain"
                             intent.putExtra(Intent.EXTRA_SUBJECT, "I'm Coming")
-                            //intent.putExtra(Intent.EXTRA_TEXT, "I'M COMING FOR YOU. See for yourself:\n${route.url}")
+                            intent.putExtra(Intent.EXTRA_TEXT, "I'M COMING FOR YOU. See for yourself:\n${Preferences.Route.url}")
                             startActivity(Intent.createChooser(intent, null))
                         } else {
                             Toast.makeText(this, "smthing wrong", Toast.LENGTH_SHORT).show()

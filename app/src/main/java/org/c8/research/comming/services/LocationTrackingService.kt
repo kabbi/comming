@@ -4,6 +4,7 @@ import android.app.IntentService
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.support.v7.app.NotificationCompat
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationAvailability
 import com.google.android.gms.location.LocationRequest
@@ -15,6 +16,7 @@ import com.pawegio.kandroid.wtf
 import org.c8.research.comming.CommingApi
 import org.c8.research.comming.entities.Api
 import org.c8.research.comming.entities.Preferences
+
 
 const val LOCATION_UPDATE_INTERVAL_MILLIS: Long = 1000
 const val MIN_UPDATE_INTERVAL_MILLIS: Long = 1000
@@ -39,6 +41,26 @@ class LocationTrackingService : IntentService("LocationTrackingService") {
                 wtf("Intent from gsm does not have valid data")
             }
         }
+//        } else if (ACTION_STOP == action) {
+//            stopLocationTracking()
+//        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+//        val stop = PendingIntent.getActivity(
+//                this,
+//                0,
+//                get,
+//                PendingIntent.FLAG_UPDATE_CURRENT
+//        )
+////
+        val notification = NotificationCompat.Builder(this)
+                .setContentTitle("My notification")
+                .setContentText("Hello World!")
+                    .build()
+
+        startForeground(123, notification)
     }
 
     private fun handleAvailabilityChanged(availability: LocationAvailability) {
@@ -54,12 +76,23 @@ class LocationTrackingService : IntentService("LocationTrackingService") {
         }
         result.locations.forEach {
             i("Location ${it.elapsedRealtimeNanos}, ${it.longitude}, ${it.latitude}, at ${it.accuracy}m")
-            commingService.pushRoutePoint(routeId, Api.PushPointRequest(it.longitude, it.latitude, it.elapsedRealtimeNanos))
+            commingService.pushRoutePoint(
+                    routeId,
+                    Api.PushPointRequest(
+                            //it.accuracy,
+                            //it.altitude,
+                            //it.bearing,
+                            it.elapsedRealtimeNanos,
+                            it.latitude,
+                            it.longitude)
+                            //it.speed
+            ).subscribe({result -> }, {error -> })
         }
     }
 
     companion object {
         private val ACTION_PUSH_LOCATION = "org.c8.research.comming.action.PUSH_LOCATION"
+        private val ACTION_STOP = "org.c8.research.comming.action.PUSH_LOCATION"
 
         internal fun makePushLocationIntent(context: Context): Intent {
             val intent = Intent(context, LocationTrackingService::class.java)

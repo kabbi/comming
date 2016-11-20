@@ -1,6 +1,6 @@
 <resources>
     <string name="mapbox_api_key">pk.eyJ1Ijoia2FiYmkiLCJhIjoiY2l2YmJkYTJrMDA1eDJ5cWRxaGhyOTlldSJ9.0pqWoDd1Y2Ljh9nhQklWng</string>
-    <string name="api_host">http://private-41dfe-kabbi.apiary-mock.com</string>
+    <string name="api_host">http://46.101.226.252</string>
 
     <string name="app_name">I\'m Coming</string>
 
