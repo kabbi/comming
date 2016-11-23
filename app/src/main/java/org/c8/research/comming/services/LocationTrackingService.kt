@@ -61,12 +61,12 @@ class LocationTrackingService : Service() {
                 //todo user mask here
                 .setSmallIcon(R.drawable.man1)
                 .setContentTitle("You are sharing your location now")
-                .addAction(R.drawable.ic_clear_black_24dp, "stop", stopLocationPendingIntent(baseContext))
+                .addAction(R.drawable.ic_stat_name, "stop", stopLocationPendingIntent(baseContext))
                 .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.man1))
                 .setStyle(NotificationCompat.BigTextStyle().bigText("You are sharing your location now"))
                 .build()
 
-        startForeground(123, notification)
+        startForeground(13243546, notification)
     }
 
     override fun onDestroy() {

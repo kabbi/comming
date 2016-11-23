@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.GoogleApiClient
 import com.mapbox.mapboxsdk.constants.MyBearingTracking
 import com.mapbox.mapboxsdk.constants.MyLocationTracking
@@ -34,6 +35,11 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         askPermissionsIfNeeded()
+
+        val code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this)
+        if (code != ConnectionResult.SUCCESS) {
+            GoogleApiAvailability.getInstance().getErrorDialog(this, code, 1).show()
+        }
 
         share_button.setOnClickListener {
             locationBoard.locationStatus
