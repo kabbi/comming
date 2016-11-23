@@ -8,15 +8,18 @@ import com.pawegio.kandroid.textWatcher
 import kotlinx.android.synthetic.main.content_settings.*
 import org.c8.research.comming.CommingApi
 import org.c8.research.comming.Constants
+import org.c8.research.comming.LocationBoard
 import org.c8.research.comming.R
 import org.c8.research.comming.adapters.AvatarChooserAdapter
 import org.c8.research.comming.entities.Preferences
-import org.c8.research.comming.services.LocationTrackingService
-import org.c8.research.comming.utils.connectGoogleApi
 
 class SettingsActivity : AppCompatActivity() {
     val mCommingApi: CommingApi by lazy {
         CommingApi.create(applicationContext)
+    }
+
+    val locationBoard by lazy {
+        LocationBoard(applicationContext)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +27,15 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
         setSupportActionBar(findViewById(R.id.toolbar) as Toolbar?)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        locationBoard.locationStatus
+                .first()
+                .subscribe( { enabled_switch.isChecked = (it == LocationBoard.Status.RUNNING || it == LocationBoard.Status.PREPARING) } )
 
-        enabled_switch.isChecked = LocationTrackingService.isTrackingLocation(this)
         enabled_switch.setOnCheckedChangeListener { view, checked ->
             if (checked) {
-                // TODO: Implement sharing here
-                return@setOnCheckedChangeListener
-            }
-            connectGoogleApi().subscribe {
-                LocationTrackingService.stopLocationTracking(this, it)
+                locationBoard.startLocationService(this)
+            } else {
+                locationBoard.stopLocationService(this)
             }
         }
 

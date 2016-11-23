@@ -8,6 +8,7 @@ import android.os.PersistableBundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -36,14 +37,11 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
 
         share_button.setOnClickListener {
             locationBoard.locationStatus
-                    .doOnNext { status ->
-                        if (status == LocationBoard.Status.IDLE || status == LocationBoard.Status.ERROR) {
-                            locationBoard.startLocationService(this)
-                        }
-                    }
+                    .doOnSubscribe { progressBar.visibility = View.VISIBLE }
                     .filter { status -> (status == LocationBoard.Status.RUNNING || status == LocationBoard.Status.ERROR) }
                     .first()
                     .subscribe({ status ->
+                        progressBar.visibility = View.GONE
                         if (status == LocationBoard.Status.RUNNING) {
                             val intent = Intent(Intent.ACTION_SEND)
                             intent.type = "text/plain"
@@ -54,6 +52,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                             Toast.makeText(this, "smthing wrong", Toast.LENGTH_SHORT).show()
                         }
                     })
+            locationBoard.startLocationService(this)
         }
 
         map_view.onCreate(savedInstanceState)

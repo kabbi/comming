@@ -17,7 +17,7 @@ import rx.subjects.BehaviorSubject
 class LocationBoard(applicationContext: Context) {
 
     val commingApi = CommingApi.create(applicationContext)
-    val locationStatus = BehaviorSubject.create<Status>(Status.IDLE)
+    val locationStatus = BehaviorSubject.create<Status>(Status.IDLE)!!
 
     enum class Status {
         IDLE, PREPARING, RUNNING, ERROR
@@ -50,9 +50,5 @@ class LocationBoard(applicationContext: Context) {
                     LocationTrackingService.stopLocationTracking(context, googleApi)
                     locationStatus.onNext(Status.IDLE)
                 })
-    }
-
-    fun locationStatus(): Observable<Status> {
-        return locationStatus
     }
 }

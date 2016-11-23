@@ -19,7 +19,7 @@ fun Context.connectGoogleApi(): Observable<GoogleApiClient> = Observable.create 
             subscriber.onNext(client)
         }
     })
-    clientBuilder.addOnConnectionFailedListener {
+    clientBuilder.addOnConnectionFailedListener { connectionResult ->
         // TODO: Make custom error and pass connection result here
         subscriber.onError(Error())
     }

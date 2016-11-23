@@ -3,5 +3,4 @@
            android:layout_width="113dp"
            android:layout_height="113dp"
            android:contentDescription="@string/avatar_alt"
-           android:background="@drawable/selectable_background"
            android:clickable="true"/>
