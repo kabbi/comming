@@ -19,6 +19,7 @@ import com.pawegio.kandroid.startActivity
 import com.pawegio.kandroid.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.c8.research.comming.Constants
+import org.c8.research.comming.ImComingApplication
 import org.c8.research.comming.LocationBoard
 import org.c8.research.comming.R
 import org.c8.research.comming.entities.Preferences
@@ -27,9 +28,7 @@ const val PERMISSION_REQUEST_CODE: Int = 1342
 
 class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
-    val locationBoard by lazy {
-        LocationBoard(applicationContext)
-    }
+    val locationBoard by lazy { (application as ImComingApplication).locationBoard }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

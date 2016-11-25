@@ -14,7 +14,7 @@ import retrofit2.http.Path
 import rx.Observable
 
 
-interface CommingApi {
+interface ComingApi {
 
     @POST("api/routes")
     fun createRoute(@Body request: Api.NewRouteRequest): Observable<Api.NewRouteResponse>
@@ -26,7 +26,7 @@ interface CommingApi {
     fun pushRoutePoint(@Path("routeId") routeId: String, @Body request: Api.PushPointRequest): Observable<Unit>
 
     companion object {
-        fun create(context: Context): CommingApi {
+        fun create(context: Context): ComingApi {
             val gsonBuilder = GsonBuilder()
             val okhttp = OkHttpClient.Builder()
                     .addNetworkInterceptor(StethoInterceptor())
@@ -39,7 +39,7 @@ interface CommingApi {
                     .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                     .build()
 
-            return restAdapter.create(CommingApi::class.java)
+            return restAdapter.create(ComingApi::class.java)
         }
     }
 }

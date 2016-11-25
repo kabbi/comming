@@ -1,11 +1,10 @@
 package org.c8.research.comming
 
 import android.content.Context
+import com.pawegio.kandroid.e
 import org.c8.research.comming.entities.Api
 import org.c8.research.comming.entities.Preferences
 import org.c8.research.comming.services.LocationTrackingService
-import org.c8.research.comming.utils.connectGoogleApi
-import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
@@ -16,7 +15,7 @@ import rx.subjects.BehaviorSubject
  */
 class LocationBoard(applicationContext: Context) {
 
-    val commingApi = CommingApi.create(applicationContext)
+    val comingApi by lazy { (applicationContext as ImComingApplication).comingApi }
     val locationStatus = BehaviorSubject.create<Status>(Status.IDLE)!!
 
     enum class Status {
@@ -25,30 +24,22 @@ class LocationBoard(applicationContext: Context) {
 
     fun startLocationService(context: Context) {
         locationStatus.onNext(Status.PREPARING)
-        Observable.combineLatest(
-                commingApi.createRoute(Api.NewRouteRequest("av1", "The Godzilla")),
-                    context.connectGoogleApi(),
-                    { a, b -> Pair(a, b)}
-            )
+        comingApi.createRoute(Api.NewRouteRequest("av1", "The Godzilla"))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ result ->
-                        val (route, googleApi) = result
+                    .subscribe({ route ->
                         Preferences.Route.id = route._id
                         Preferences.Route.url = route.url
-                        LocationTrackingService.startLocationTracking(context, googleApi)
-                        googleApi.disconnect()
+                        LocationTrackingService.startLocationPendingIntent(context).send()
                         locationStatus.onNext(Status.RUNNING)
                     }, { error ->
+                        e(error.message!!)
                         locationStatus.onNext(Status.ERROR)
                     })
     }
 
     fun stopLocationService(context: Context) {
-        context.connectGoogleApi()
-                .subscribe({ googleApi ->
-                    LocationTrackingService.stopLocationTracking(context, googleApi)
-                    locationStatus.onNext(Status.IDLE)
-                })
+        locationStatus.onNext(Status.IDLE)
+        LocationTrackingService.stopLocationPendingIntent(context).send()
     }
 }

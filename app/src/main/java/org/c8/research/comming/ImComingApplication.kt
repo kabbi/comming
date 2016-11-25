@@ -4,7 +4,11 @@ import android.app.Application
 import com.facebook.stetho.Stetho
 import com.mapbox.mapboxsdk.MapboxAccountManager
 
-class Application : Application() {
+class ImComingApplication : Application() {
+
+    val locationBoard by lazy { LocationBoard(this) }
+    val comingApi by lazy { ComingApi.create(this) }
+
     override fun onCreate() {
         super.onCreate()
 
